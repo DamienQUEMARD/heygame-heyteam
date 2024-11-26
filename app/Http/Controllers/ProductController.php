@@ -7,6 +7,7 @@ use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -24,6 +25,12 @@ class ProductController extends Controller
 
     public function create(CreateProductRequest $request): JsonResponse
     {
+        /** @var User $user */
+        $user = Auth::user();
+        if (! $user->isAdmin()) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
         $product = $this->productService->create($request->all());
 
         return response()->json(['product' => $product], 201);
@@ -31,6 +38,12 @@ class ProductController extends Controller
 
     public function update(UpdateProductRequest $request, int $id): JsonResponse
     {
+        /** @var User $user */
+        $user = Auth::user();
+        if (! $user->isAdmin()) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
         try {
             $product = $this->productService->update($request->all(), $id);
             return response()->json(['product' => $product], 200);
@@ -41,6 +54,12 @@ class ProductController extends Controller
 
     public function delete(int $id): JsonResponse
     {
+        /** @var User $user */
+        $user = Auth::user();
+        if (! $user->isAdmin()) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
         try {
             $this->productService->delete($id);
             return response()->json([], 204);

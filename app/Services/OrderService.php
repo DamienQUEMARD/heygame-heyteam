@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Order;
 use App\Notifications\OrderStatusNotification;
 use App\Repositories\OrderRepository;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 
 class OrderService {

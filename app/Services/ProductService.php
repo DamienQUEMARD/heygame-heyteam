@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Product;
 use App\Repositories\ProductRepository;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProductService {
     public function __construct(protected ProductRepository $productRepository)
