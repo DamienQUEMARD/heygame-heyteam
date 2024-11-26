@@ -38,4 +38,12 @@ class ProductRepository {
         $product = Product::findOrFail($id);
         $product->delete();
     }
+
+    /**
+     * @throws ModelNotFoundException
+     */
+    public function find(int $id): Product
+    {
+        return Product::findOrFail($id);
+    }
 }

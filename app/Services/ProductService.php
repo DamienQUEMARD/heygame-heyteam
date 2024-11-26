@@ -19,6 +19,14 @@ class ProductService {
     /**
      * @throws ModelNotFoundException
      */
+    public function find(int $id): Product
+    {
+        return $this->productRepository->find($id);
+    }
+
+    /**
+     * @throws ModelNotFoundException
+     */
     public function update(array $data, int $id): Product
     {
         return $this->productRepository->update($data, $id);
